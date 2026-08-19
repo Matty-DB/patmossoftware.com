@@ -129,12 +129,13 @@
 
   <h2>Every cause was something I was proud of</h2>
 
-  <p>The interesting part is not that the numbers were wrong. I could have set
-  lives to one and the error budget to two and reached the wall by Tuesday. The
-  interesting part is <em>why</em> the errors never arrived, because every
-  reason was a design decision I still think is correct.</p>
+  <p>The numbers were wrong, but that is not the interesting bit. I could have
+  set lives to one and the error budget to two and reached the wall by Tuesday.
+  What I could not do was fix the reason the errors never arrived in the first
+  place, because every one of those reasons was a decision I still think is
+  correct.</p>
 
-  <p><strong>A mis-swipe costs nothing.</strong> Dragging across a rectangle you
+  <p>A mis-swipe costs nothing. Dragging across a rectangle you
   already drew is clumsiness, not a reasoning error, so it is free. So is
   changing your mind mid-drag: come back to where you started, let go, nothing
   happens. In the code there is a single flag,
@@ -144,16 +145,16 @@
   possible way to inflate an error count. I refused to do it and the error
   count stayed low.</p>
 
-  <p><strong>The game judges your move against the rules, never against the
-  stored solution.</strong> If you draw a rectangle covering six squares around
-  a 4, it tells you it is six squares and the number says four. It does not tell
+  <p>Nothing is ever judged against the stored answer either. If you draw a
+  rectangle covering six squares around a 4, the game tells you it is six
+  squares and the number says four. It does not tell
   you &ldquo;that&rsquo;s not right&rdquo;, because feedback you cannot reason
   about is not feedback. But a player who is told exactly what is wrong with a
   move makes fewer subsequent wrong moves, and my error count went down
   again.</p>
 
-  <p><strong>Dead ends are caught at the move that causes them.</strong> This is
-  the one that really did it. A rectangle can obey every visible rule and still
+  <p>The third one is what really did it: dead ends get caught at the move that
+  causes them. A rectangle can obey every visible rule and still
   make the rest of the puzzle unsolvable &mdash; leaving some number with
   nowhere to go, or a square that nothing can reach. Without a check for that,
   you find out twenty moves later at a square nothing fits, and you get charged
@@ -161,20 +162,20 @@
   clue&rsquo;s remaining candidates after every move and rejects the one that
   broke it, immediately.</p>
 
-  <p>Look at what that does to a life economy. Before the check, one bad idea
-  cascades into five or six errors as you build on top of it. After the check,
-  one bad idea costs exactly one error and you back out. I had taken the single
-  largest source of errors in the game and divided it by five, on purpose, for
-  good reasons.</p>
+  <p>Before that check existed, one bad idea cascaded into five or six errors as
+  you built on top of it. After it, one bad idea costs exactly one error and you
+  back out. I had taken the single largest source of errors in the game and
+  divided it by five, on purpose, for good reasons.</p>
 
-  <p><strong>The onboarding ramp cannot be failed.</strong> By design. The early
+  <p>And the opening cannot be failed, by design. The early
   boards are small enough that the answer is nearly visible, which is how you
-  teach a rule without a tutorial. It also means the entire section of the game
-  a new player is guaranteed to see generates approximately zero errors.</p>
+  teach a rule without a tutorial. It also means the one part of the game every
+  new player is guaranteed to see produces almost no errors at all.</p>
 
-  <p>Four decisions, each one right on its own terms, all of them pulling in the
-  same direction: fewer errors, which meant fewer lives lost, which meant no
-  paywall.</p>
+  <p>Which is the whole problem, stated once.</p>
+
+  <p>Four separate decisions, none of them wrong, all pulling the same way. The
+  paywall was downstream of every one.</p>
 
   <h2>The choice</h2>
 
