@@ -1,22 +1,59 @@
 # patmossoftware.com
 
-Coming-soon one-pager. Single self-contained `index.html` — no build step, no external requests
-(fonts are system stacks, favicon and logo are inline SVG).
+Hand-written static site. **No build step** — GitHub Pages serves the repo root
+straight from `main`, so what is committed is what is live.
 
-## Deploy to GitHub Pages
+Every page is one self-contained `index.html` with its stylesheet inline, and
+makes no external requests: fonts are system stacks, the favicon and the mark
+are inline SVG. That is deliberate, and worth keeping. It means a page cannot
+break because something else went down, and there is nothing to rebuild before
+a change goes out.
 
-```bash
-cd ~/Documents/_AppDev/patmossoftware.com
-git init && git add -A && git commit -m "Coming soon page"
-gh repo create patmossoftware.com --public --source=. --push
+```
+/                              studio home, leads with the current app
+/shikaku/                      the app page
+/blog/                         post index
+/blog/<slug>/                  a post
+/support/                      support and FAQ (linked from the App Store)
+/privacy/                      privacy policy
+/og.png                        default social preview
+/shikaku/og.png                social preview for the app page and its post
+/tools/make-og.py              regenerates both preview images
 ```
 
-Then in the repo: **Settings → Pages → Source: Deploy from a branch → `main` / `root`**.
+## Adding a post
 
-The `CNAME` file is already committed, so Pages picks up the custom domain automatically.
-Once DNS resolves, tick **Enforce HTTPS** (may take up to ~24h for the cert to issue).
+Copy an existing post directory, change the content, and add an entry at the
+top of the list in `blog/index.html`. There is no generator and no feed yet; at
+one post a month that is cheaper than maintaining one.
 
-## DNS at your registrar
+Update all four of these in the new page's `<head>`, because they are what
+every link preview reads: `<title>`, `description`, `canonical`, and the
+`og:*` block.
+
+## Social previews
+
+`og.png` and `shikaku/og.png` are generated, not drawn by hand:
+
+```bash
+python3 tools/make-og.py     # needs Pillow
+```
+
+Both are 1200x630. The Shikaku one contains a real board, and the three
+rectangles in it **must tile the grid exactly** — there is an assertion in the
+script that fails if they do not. An image showing uncovered squares beside the
+words "cover the whole grid" is the first thing a puzzle player will notice.
+
+## Deploy
+
+Push to `main`. Pages rebuilds within about a minute.
+
+Settings that are already in place and should not need touching: **Settings →
+Pages → Deploy from a branch → `main` / root**, with `CNAME` committed at the
+root so the custom domain survives every deploy, `.nojekyll` so Jekyll does not
+try to process anything, and Enforce HTTPS on.
+
+## DNS
 
 Apex `patmossoftware.com` — four A records:
 
@@ -27,12 +64,13 @@ Apex `patmossoftware.com` — four A records:
 185.199.111.153
 ```
 
-(Optional AAAA for IPv6: `2606:50c0:8000::153`, `…8001::153`, `…8002::153`, `…8003::153`)
+Optional AAAA for IPv6: `2606:50c0:8000::153`, `…8001::153`, `…8002::153`,
+`…8003::153`. Plus a CNAME for `www` → `Matty-DB.github.io`.
 
-Plus a CNAME for `www` → `<your-github-username>.github.io`
+## Screenshots
 
-## Before it goes live — edit these
-
-- `hello@patmossoftware.com` (3 places in `index.html` + footer) — set up the mailbox, or swap to your Proton address
-- The tagline in `<p class="tagline">`
-- `og.png` — 1200×630 social preview image, referenced in the head but not yet created
+`shikaku/img/*.png` are resized from the App Store captures in the
+`shikaku-game` repo (`AppStore/Screenshots/6.5-inch/`), scaled to 600px wide.
+Capture them from the simulator rather than a phone — the status bar can only
+be frozen on the simulator, so a real device leaves the actual time, battery
+and carrier in the shot.
