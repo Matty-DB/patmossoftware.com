@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shikaku &mdash; Patmos Software</title>
+<meta name="description" content="A logic puzzle with one rule. Divide the grid into rectangles: every rectangle holds exactly one number, and that number is how many squares it covers. Free to level 40, no ads, no subscription, no accounts.">
+<link rel="canonical" href="https://patmossoftware.com/shikaku/">
+<meta name="theme-color" content="#0a0f16">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://patmossoftware.com/shikaku/">
+<meta property="og:title" content="Shikaku — Logic Puzzle">
+<meta property="og:description" content="Split the grid into rectangles. Every rectangle holds one number, and that number is its size. That is the whole rulebook.">
+<meta property="og:image" content="https://patmossoftware.com/shikaku/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230a0f16'/><circle cx='32' cy='27' r='9' fill='none' stroke='%23c9a227' stroke-width='3'/><path d='M12 44h40' stroke='%235f7f96' stroke-width='3' stroke-linecap='round'/></svg>">
+
+<style>
+  :root{
+    --bg:#0a0f16; --bg2:#0e1620; --ink:#eef3f8; --muted:#8ea3b5;
+    --line:rgba(158,183,205,.16); --gold:#c9a227; --sea:#5f7f96;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{
+    margin:0;min-height:100svh;
+    background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 55%,#060a0f 100%);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:ui-sans-serif,-apple-system,"SF Pro Text","Segoe UI",Inter,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.7;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:3.5rem 1.5rem 5rem}
+  a{color:var(--gold)}
+  a:hover{color:#e0bd4e}
+
+  .home{
+    display:inline-block;font-size:.8rem;color:var(--muted);text-decoration:none;
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:2.5rem;
+  }
+  .home:hover{color:var(--ink)}
+
+  h1{
+    font-family:ui-serif,"Iowan Old Style",Palatino,Georgia,serif;
+    font-weight:500;font-size:clamp(2.2rem,7vw,3.2rem);letter-spacing:.09em;
+    margin:0 0 1.2rem;text-transform:uppercase;
+  }
+  h2{
+    font-size:1.05rem;font-weight:600;margin:2.8rem 0 .7rem;
+    padding-top:1.7rem;border-top:1px solid var(--line);
+  }
+  p{margin:0 0 1rem;color:#d7e2ec}
+  strong{color:#fff}
+
+  .lead{
+    font-size:1.12rem;color:var(--ink);
+    border-left:2px solid var(--gold);padding-left:1.1rem;margin-bottom:2.2rem;
+  }
+
+  .cta{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin:0 0 .8rem}
+  .btn{
+    display:inline-block;padding:.85rem 1.6rem;border-radius:999px;
+    font-size:.95rem;font-weight:500;text-decoration:none;
+    transition:transform .18s ease,background-color .18s ease,border-color .18s ease,color .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .btn-primary{background:var(--ink);color:#0a0f16}
+  .btn-primary:hover{background:#fff;color:#0a0f16}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .price{font-size:.85rem;color:var(--muted);margin:0 0 2.6rem}
+
+  .shots{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;
+    margin:2.4rem 0 .8rem;
+  }
+  .shots img{
+    width:100%;height:auto;display:block;border-radius:10px;
+    border:1px solid var(--line);
+  }
+  .caption{font-size:.78rem;color:var(--muted);text-align:center;margin:0 0 2rem}
+  @media (max-width:520px){
+    .shots{grid-template-columns:1fr 1fr;gap:.7rem}
+    .shots img:last-child{display:none}
+  }
+
+  .box{
+    background:rgba(255,255,255,.03);border:1px solid var(--line);
+    border-radius:12px;padding:1.1rem 1.2rem;margin:1.6rem 0;
+  }
+  .box p:last-child{margin-bottom:0}
+
+  table{width:100%;border-collapse:collapse;margin:1.2rem 0 1rem;font-size:.92rem}
+  th,td{text-align:left;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:500;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase}
+  td:first-child{color:#d7e2ec}
+  tbody td:not(:first-child){color:var(--muted)}
+
+  footer{
+    margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);
+    font-size:.82rem;color:var(--muted);
+  }
+  footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
+  footer a:hover{color:var(--ink);border-bottom-color:var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="home" href="/">&larr; Patmos Software</a>
+
+  <h1>Shikaku</h1>
+
+  <p class="lead">Divide the grid into rectangles. Every rectangle holds exactly
+  one number, and that number is how many squares it covers. Cover the whole
+  grid and the puzzle is solved.</p>
+
+  <p>That is the entire rulebook. There is no tutorial to sit through &mdash;
+  the first boards are small enough that the answer is nearly visible, and by
+  level ten you are genuinely working.</p>
+
+  <div class="cta">
+    <a class="btn btn-primary" href="https://apps.apple.com/app/id6795003924" rel="noopener">Download on the App Store</a>
+    <a class="btn btn-ghost" href="/support/">Support</a>
+  </div>
+  <p class="price">iPhone &middot; iOS 17 or later &middot; Free to level 40, then one payment</p>
+
+  <div class="shots">
+    <img src="img/board-midnight.png" alt="A Shikaku board part-solved in the Midnight theme, with numbered clues and drawn rectangles." width="600" height="1298" loading="lazy">
+    <img src="img/board-forest.png" alt="The same game in the Forest and Brass theme." width="600" height="1298" loading="lazy">
+    <img src="img/solved.png" alt="A completed puzzle showing the score for a clean solve." width="600" height="1298" loading="lazy">
+  </div>
+  <p class="caption">Midnight, Forest &amp; Brass, and a finished board.</p>
+
+  <h2>One answer, always</h2>
+  <p>Every board is checked for a unique solution before you ever see it. There
+  is never a moment where you have to guess and hope. Anything you can work out,
+  you can prove.</p>
+
+  <h2>It catches the move that broke it</h2>
+  <p>A rectangle can obey every rule and still make the rest of the puzzle
+  impossible &mdash; leaving a number with nowhere to go, or a square nothing
+  can reach. Shikaku tells you at the move that caused it, instead of letting
+  you discover it twenty moves later with no idea where it went wrong.</p>
+
+  <h2>Mistakes cost something. Fumbles do not.</h2>
+  <p>Dragging across a rectangle you already placed is a mis-swipe, not an
+  error, and costs nothing. Change your mind mid-drag, come back to where you
+  started and let go &mdash; that cancels, free. Only real reasoning errors
+  count against you. Three per puzzle.</p>
+
+  <h2>Seven difficulties</h2>
+  <p>Gentle, Easy, Medium, Hard, Expert, Master and Grandmaster. The hard tiers
+  are not simply bigger boards &mdash; a Grandmaster puzzle has fewer, larger
+  rectangles and far less that can be read off at a glance. It is close to pure
+  deduction.</p>
+
+  <h2>A new puzzle every day</h2>
+  <p>The Daily Challenge is free forever, with or without the full game. Keep it
+  up for seven days running and you earn hints. Every player gets the same
+  board, worked out from the date, with no server involved.</p>
+
+  <h2>Your progress is yours</h2>
+  <p>Put it down mid-puzzle and it is exactly where you left it. Everything
+  lives on your device. Nothing is collected, nothing is sent anywhere, and
+  there is no account to make.</p>
+
+  <h2>What is free and what is not</h2>
+  <table>
+    <thead>
+      <tr><th>&nbsp;</th><th>Free</th><th>Full game</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Levels</td><td>1&ndash;40</td><td>Unlimited</td></tr>
+      <tr><td>Difficulties</td><td>Up to Hard</td><td>+ Expert, Master, Grandmaster</td></tr>
+      <tr><td>Themes</td><td>Midnight</td><td>All three</td></tr>
+      <tr><td>Daily Challenge</td><td>Always</td><td>Always</td></tr>
+    </tbody>
+  </table>
+  <p>One payment unlocks the rest. No subscription, no adverts, no lives, no
+  timers, and nothing to wait for.</p>
+
+  <div class="box">
+    <p><strong>Why there are no lives:</strong> there used to be. The game
+    turned out to be too fair to charge anyone, so the business model changed
+    instead of the game &mdash;
+    <a href="/blog/fairness-killed-the-paywall/">the whole story is here</a>.</p>
+  </div>
+
+  <footer>
+    Patmos Software &middot; Melbourne, Australia &middot;
+    <a href="/support/">Support</a> &middot;
+    <a href="/privacy/">Privacy</a>
+  </footer>
+
+</div>
+</body>
+</html>

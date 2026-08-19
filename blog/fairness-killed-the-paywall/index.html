@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fairness killed the paywall &mdash; Patmos Software</title>
+<meta name="description" content="I built a lives economy into a puzzle game and then deleted it, because the game turned out to be too fair to charge anybody. Every reason the paywall was unreachable was a design decision I still think is correct.">
+<link rel="canonical" href="https://patmossoftware.com/blog/fairness-killed-the-paywall/">
+<meta name="theme-color" content="#0a0f16">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://patmossoftware.com/blog/fairness-killed-the-paywall/">
+<meta property="og:title" content="Fairness killed the paywall">
+<meta property="og:description" content="I built a lives economy into a puzzle game and then deleted it, because the game turned out to be too fair to charge anybody.">
+<meta property="og:image" content="https://patmossoftware.com/shikaku/og.png">
+<meta property="article:published_time" content="2026-08-19">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230a0f16'/><circle cx='32' cy='27' r='9' fill='none' stroke='%23c9a227' stroke-width='3'/><path d='M12 44h40' stroke='%235f7f96' stroke-width='3' stroke-linecap='round'/></svg>">
+
+<style>
+  :root{
+    --bg:#0a0f16; --bg2:#0e1620; --ink:#eef3f8; --muted:#8ea3b5;
+    --line:rgba(158,183,205,.16); --gold:#c9a227; --sea:#5f7f96;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{
+    margin:0;min-height:100svh;
+    background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 55%,#060a0f 100%);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:ui-sans-serif,-apple-system,"SF Pro Text","Segoe UI",Inter,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.75;
+  }
+  .wrap{max-width:660px;margin:0 auto;padding:3.5rem 1.5rem 5rem}
+  a{color:var(--gold)}
+  a:hover{color:#e0bd4e}
+
+  .home{
+    display:inline-block;font-size:.8rem;color:var(--muted);text-decoration:none;
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:2.5rem;
+  }
+  .home:hover{color:var(--ink)}
+
+  h1{
+    font-family:ui-serif,"Iowan Old Style",Palatino,Georgia,serif;
+    font-weight:500;font-size:clamp(1.9rem,5.5vw,2.7rem);letter-spacing:.03em;
+    line-height:1.2;margin:0 0 .5rem;
+  }
+  .dateline{margin:0 0 2.4rem;font-size:.82rem;color:var(--muted)}
+
+  h2{
+    font-family:ui-serif,"Iowan Old Style",Palatino,Georgia,serif;
+    font-size:1.35rem;font-weight:500;letter-spacing:.01em;
+    margin:3rem 0 .9rem;padding-top:1.8rem;border-top:1px solid var(--line);
+  }
+  p{margin:0 0 1.15rem;color:#d7e2ec}
+  strong{color:#fff;font-weight:600}
+  em{color:var(--ink)}
+
+  .lead{
+    font-size:1.12rem;color:var(--ink);
+    border-left:2px solid var(--gold);padding-left:1.1rem;margin-bottom:2rem;
+  }
+
+  code{
+    font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    font-size:.88em;color:#e6d9a8;
+    background:rgba(201,162,39,.09);border:1px solid rgba(201,162,39,.16);
+    border-radius:4px;padding:.08em .35em;
+  }
+  pre{
+    background:rgba(255,255,255,.03);border:1px solid var(--line);
+    border-radius:10px;padding:1rem 1.1rem;overflow-x:auto;margin:1.4rem 0;
+  }
+  pre code{background:none;border:0;padding:0;color:#e6d9a8;font-size:.86rem}
+
+  .end{
+    margin-top:3rem;padding:1.1rem 1.2rem;
+    background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;
+    font-size:.95rem;
+  }
+  .end p:last-child{margin-bottom:0}
+
+  footer{
+    margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);
+    font-size:.82rem;color:var(--muted);
+  }
+  footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
+  footer a:hover{color:var(--ink);border-bottom-color:var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="home" href="/blog/">&larr; Writing</a>
+
+  <h1>Fairness killed the paywall</h1>
+  <p class="dateline">19 August 2026 &middot; Patmos Software</p>
+
+  <p class="lead">I built a lives economy into a puzzle game and then deleted
+  the whole thing, because the game turned out to be too fair to charge
+  anybody.</p>
+
+  <p><a href="/shikaku/">Shikaku</a> is a logic puzzle. You divide a grid into
+  rectangles, each rectangle holds exactly one number, and that number is how
+  many squares it covers. I was building it free-to-play with a soft wall:
+  three lives, one regenerating every thirty minutes, and you lose a life when
+  you make three reasoning errors in a single puzzle. Run out and you wait, or
+  you pay.</p>
+
+  <p>That is a shape you have seen a hundred times. It is also, as built,
+  unreachable.</p>
+
+  <h2>The arithmetic</h2>
+
+  <p>A life costs three errors. Three lives cost nine. Lives regenerate at one
+  per half hour, so emptying the tank means nine reasoning errors inside about
+  ninety minutes.</p>
+
+  <p>Not nine taps in the wrong place. Nine times being <em>wrong about the
+  puzzle</em>, in an hour and a half, on a game whose first eight levels have no
+  look-ahead in them at all and cannot really be failed.</p>
+
+  <p>I never once hit the wall. Not in a full evening of trying, and I was
+  trying &mdash; by that point I was deliberately playing badly to see the
+  screen I had built. Nobody who was actually enjoying the game was ever going
+  to see it.</p>
+
+  <h2>Every cause was something I was proud of</h2>
+
+  <p>The numbers were wrong, but that is not the interesting bit. I could have
+  set lives to one and the error budget to two and reached the wall by Tuesday.
+  What I could not do was fix the reason the errors never arrived in the first
+  place, because every one of those reasons was a decision I still think is
+  correct.</p>
+
+  <p>A mis-swipe costs nothing. Dragging across a rectangle you
+  already drew is clumsiness, not a reasoning error, so it is free. So is
+  changing your mind mid-drag: come back to where you started, let go, nothing
+  happens. In the code there is a single flag,
+  <code>MoveRejection.costsAMistake</code>, and it is false for
+  <code>.overlapsExisting</code> and true for everything else. Charging for
+  fumbles makes a game feel hostile rather than hard, and it is the cheapest
+  possible way to inflate an error count. I refused to do it and the error
+  count stayed low.</p>
+
+  <p>Nothing is ever judged against the stored answer either. If you draw a
+  rectangle covering six squares around a 4, the game tells you it is six
+  squares and the number says four. It does not tell
+  you &ldquo;that&rsquo;s not right&rdquo;, because feedback you cannot reason
+  about is not feedback. But a player who is told exactly what is wrong with a
+  move makes fewer subsequent wrong moves, and my error count went down
+  again.</p>
+
+  <p>The third one is what really did it: dead ends get caught at the move that
+  causes them. A rectangle can obey every visible rule and still
+  make the rest of the puzzle unsolvable &mdash; leaving some number with
+  nowhere to go, or a square that nothing can reach. Without a check for that,
+  you find out twenty moves later at a square nothing fits, and you get charged
+  for a mistake you made ages ago. So the game enumerates each unplaced
+  clue&rsquo;s remaining candidates after every move and rejects the one that
+  broke it, immediately.</p>
+
+  <p>Before that check existed, one bad idea cascaded into five or six errors as
+  you built on top of it. After it, one bad idea costs exactly one error and you
+  back out. I had taken the single largest source of errors in the game and
+  divided it by five, on purpose, for good reasons.</p>
+
+  <p>And the opening cannot be failed, by design. The early
+  boards are small enough that the answer is nearly visible, which is how you
+  teach a rule without a tutorial. It also means the one part of the game every
+  new player is guaranteed to see produces almost no errors at all.</p>
+
+  <p>Which is the whole problem, stated once.</p>
+
+  <p>Four separate decisions, none of them wrong, all pulling the same way. The
+  paywall was downstream of every one.</p>
+
+  <h2>The choice</h2>
+
+  <p>So there were two ways out.</p>
+
+  <p>I could make the game worse. Charge for mis-swipes. Remove the dead-end
+  check and let people fail slowly and confusingly. Steepen the opening so
+  beginners lose. All of these would have made the paywall reachable, and all of
+  them would have made the game meaningfully worse at the exact moment somebody
+  was deciding whether they liked it.</p>
+
+  <p>Or I could change the model.</p>
+
+  <p>Free to level 40, then one payment for everything: levels that do not run
+  out, the Expert, Master and Grandmaster tiers, and all three themes. The Daily
+  Challenge stays free forever either way. No ads, no subscription, no
+  accounts.</p>
+
+  <p>The gate is one rule. Levels 1 to 40 never serve Expert or above, which is
+  what lets the whole thing be &ldquo;past level 40&rdquo; instead of a tier
+  lock that could strand a free player halfway through a run on a level they
+  cannot open. That one constraint on the level plan is doing a lot of quiet
+  work &mdash; it also means the hard tiers are genuinely something the purchase
+  unlocks, rather than content that was already there behind a different
+  sign.</p>
+
+  <p>Running out of errors now simply loses the board. You keep your three per
+  puzzle, but there is no currency behind them. Losing your work and your time
+  is tension enough for a game somebody has paid for once.</p>
+
+  <h2>What the code remembers</h2>
+
+  <p><code>LivesManager</code> became <code>PlayerWallet</code> &mdash; hints
+  and the unlock, nothing else. A class called <code>LivesManager</code> with no
+  lives in it is the kind of lie that costs somebody an hour six months later,
+  and that somebody is me.</p>
+
+  <p>But the stored property is still called <code>hasUnlimitedLives</code>.
+  Renaming a persisted property risks SwiftData treating it as a drop-and-add,
+  and silently stripping a purchase somebody paid for is not a risk worth taking
+  to make a field name read nicely. Everything goes through
+  <code>hasFullGame</code> instead.</p>
+
+  <p>The product identifier is worse and for the same reason:</p>
+
+  <pre><code>com.patmossoftware.shikaku.unlimitedlives</code></pre>
+
+  <p>That SKU sells a game with no lives in it, and it always will. A product ID
+  cannot be changed after it exists. Only its meaning did.</p>
+
+  <h2>Afterwards</h2>
+
+  <p>I do not know yet whether the content gate converts better than the lives
+  economy would have, and I never will, because the lives economy converted at a
+  rate I could not measure &mdash; nobody reached it.</p>
+
+  <p>What I am fairly confident about is the general shape of the mistake. A
+  free-to-play wall is a machine for converting player failure into money, and I
+  had spent the whole build carefully engineering failure out of the game. Those
+  two projects were in direct opposition the entire time and I did not notice
+  until I sat down with a calculator.</p>
+
+  <p>If you are building the fair version of something and monetising the unfair
+  version of it, at some point one of them has to go.</p>
+
+  <div class="end">
+    <p><a href="/shikaku/">Shikaku</a> is on the App Store. Free to level 40,
+    one payment for the rest, and the daily puzzle is free forever.</p>
+  </div>
+
+  <footer>
+    Patmos Software &middot; Melbourne, Australia &middot;
+    <a href="/blog/">Writing</a> &middot;
+    <a href="/shikaku/">Shikaku</a> &middot;
+    <a href="/privacy/">Privacy</a>
+  </footer>
+
+</div>
+</body>
+</html>

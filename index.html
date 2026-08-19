@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Patmos Software — Coming Soon</title>
-<meta name="description" content="Patmos Software is an app development studio. Something is being built here.">
+<title>Patmos Software</title>
+<meta name="description" content="A small app studio in Melbourne. No ads, no subscriptions, no accounts — just apps you pay for once, or not at all.">
 <link rel="canonical" href="https://patmossoftware.com/">
 
 <!-- Open Graph / social -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://patmossoftware.com/">
 <meta property="og:title" content="Patmos Software">
-<meta property="og:description" content="An app development studio. Something is being built here.">
+<meta property="og:description" content="A small app studio in Melbourne. No ads, no subscriptions, no accounts.">
 <meta property="og:image" content="https://patmossoftware.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0a0f16">
@@ -85,8 +85,8 @@
     display:flex;flex-direction:column;
     align-items:center;justify-content:center;
     text-align:center;
-    padding:clamp(2rem,6vw,4rem) 1.5rem;
-    gap:clamp(1.5rem,4vw,2.25rem);
+    padding:clamp(2.5rem,6vw,4rem) 1.5rem;
+    gap:clamp(1.25rem,3.5vw,1.9rem);
   }
 
   /* mark */
@@ -111,32 +111,36 @@
 
   .tagline{
     margin:0;
-    max-width:34ch;
-    font-size:clamp(1rem,2.4vw,1.3rem);
-    line-height:1.6;
+    max-width:40ch;
+    font-size:clamp(1rem,2.4vw,1.22rem);
+    line-height:1.65;
     color:var(--muted);
   }
 
-  .status{
-    display:inline-flex;align-items:center;gap:.6rem;
-    padding:.5rem 1rem;
-    border:1px solid var(--line);border-radius:999px;
-    font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--muted);
-    background:rgba(255,255,255,.02);
+  /* ---- the product card ---- */
+  .card{
+    width:min(520px,100%);
+    text-align:left;
+    background:rgba(255,255,255,.035);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:1.5rem 1.6rem;
     backdrop-filter:blur(6px);
+    transition:border-color .2s ease;
   }
-  .dot{
-    width:7px;height:7px;border-radius:50%;background:var(--gold);
-    box-shadow:0 0 0 0 rgba(201,162,39,.6);
-    animation:ping 2.4s ease-out infinite;
+  .card:hover{border-color:rgba(201,162,39,.34)}
+  .card-eyebrow{
+    display:block;
+    font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--sea);margin-bottom:.6rem;
   }
-  @keyframes ping{
-    0%{box-shadow:0 0 0 0 rgba(201,162,39,.55)}
-    70%{box-shadow:0 0 0 9px rgba(201,162,39,0)}
-    100%{box-shadow:0 0 0 0 rgba(201,162,39,0)}
+  .card h2{
+    margin:0 0 .5rem;
+    font-family:ui-serif,"Iowan Old Style",Palatino,Georgia,serif;
+    font-weight:500;font-size:1.75rem;letter-spacing:.06em;text-transform:uppercase;
   }
-  @media (prefers-reduced-motion:reduce){.dot{animation:none}}
+  .card p{margin:0 0 1.2rem;color:#d7e2ec;font-size:.97rem;line-height:1.65}
+  .card-links{display:flex;flex-wrap:wrap;gap:.6rem}
 
   .actions{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
 
@@ -148,10 +152,11 @@
     text-decoration:none;
     transition:transform .18s ease, background-color .18s ease, border-color .18s ease, color .18s ease;
   }
+  .btn-sm{padding:.6rem 1.15rem;font-size:.87rem}
   .btn:hover{transform:translateY(-2px)}
   .btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
   .btn-primary{background:var(--ink);color:#0a0f16}
-  .btn-primary:hover{background:#fff}
+  .btn-primary:hover{background:#fff;color:#0a0f16}
   .btn-ghost{border:1px solid var(--line);color:var(--ink)}
   .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 
@@ -220,20 +225,31 @@
   <hr class="rule fade">
 
   <p class="tagline fade">
-    An app development studio. We're building the first thing now — the site follows shortly.
+    A small app studio in Melbourne. No adverts, no subscriptions, no accounts
+    &mdash; things you pay for once, or not at all.
   </p>
 
-  <span class="status fade"><span class="dot"></span>Coming soon</span>
+  <div class="card fade">
+    <span class="card-eyebrow">Out now &middot; iPhone</span>
+    <h2>Shikaku</h2>
+    <p>A logic puzzle with one rule. Divide the grid into rectangles, each
+    holding exactly one number, and that number is how many squares it covers.
+    Free to level 40, and the daily puzzle is free forever.</p>
+    <div class="card-links">
+      <a class="btn btn-sm btn-primary" href="https://apps.apple.com/app/id6795003924" rel="noopener">App Store</a>
+      <a class="btn btn-sm btn-ghost" href="/shikaku/">Learn more</a>
+    </div>
+  </div>
 
   <div class="actions fade">
-    <a class="btn btn-primary" href="mailto:hello@patmossoftware.com?subject=Patmos%20Software%20enquiry">Get in touch</a>
-    <a class="btn btn-ghost" href="mailto:hello@patmossoftware.com?subject=Keep%20me%20posted">Keep me posted</a>
+    <a class="btn btn-ghost" href="/blog/">Writing</a>
+    <a class="btn btn-ghost" href="mailto:hello@patmossoftware.com?subject=Patmos%20Software%20enquiry">Get in touch</a>
   </div>
 
 </main>
 
 <footer>
-  <span>&copy; <span id="year">2026</span> Patmos Software &middot; <a href="mailto:hello@patmossoftware.com">hello@patmossoftware.com</a> &middot; <a href="/privacy/">Privacy</a></span>
+  <span>&copy; <span id="year">2026</span> Patmos Software &middot; <a href="mailto:hello@patmossoftware.com">hello@patmossoftware.com</a> &middot; <a href="/support/">Support</a> &middot; <a href="/privacy/">Privacy</a></span>
   <span class="verse">&ldquo;I was on the island called Patmos&hellip;&rdquo; &mdash; Revelation 1:9</span>
 </footer>
 
