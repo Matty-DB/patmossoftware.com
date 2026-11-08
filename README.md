@@ -1,6 +1,6 @@
 # patmossoftware.com
 
-Hand-written static site. **No build step** — GitHub Pages serves the repo root
+Hand-written static site. **No build step**: GitHub Pages serves the repo root
 straight from `main`, so what is committed is what is live.
 
 Every page is one self-contained `index.html` with its stylesheet inline, and
@@ -41,7 +41,7 @@ python3 tools/make-og.py     # needs Pillow
 ```
 
 Both are 1200x630. The Shikaku one contains a real board, and the three
-rectangles in it **must tile the grid exactly** — there is an assertion in the
+rectangles in it **must tile the grid exactly**. There is an assertion in the
 script that fails if they do not. An image showing uncovered squares beside the
 words "cover the whole grid" is the first thing a puzzle player will notice.
 
@@ -56,7 +56,7 @@ try to process anything, and Enforce HTTPS on.
 
 ## DNS
 
-Apex `patmossoftware.com` — four A records:
+Apex `patmossoftware.com` uses four A records:
 
 ```
 185.199.108.153
@@ -72,6 +72,6 @@ Optional AAAA for IPv6: `2606:50c0:8000::153`, `…8001::153`, `…8002::153`,
 
 `shikaku/img/*.png` are resized from the App Store captures in the
 `shikaku-game` repo (`AppStore/Screenshots/6.5-inch/`), scaled to 600px wide.
-Capture them from the simulator rather than a phone — the status bar can only
+Capture them from the simulator rather than a phone, because the status bar can only
 be frozen on the simulator, so a real device leaves the actual time, battery
 and carrier in the shot.

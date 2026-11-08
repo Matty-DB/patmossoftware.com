@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fairness killed the paywall &mdash; Patmos Software</title>
+<title>Fairness killed the paywall | Patmos Software</title>
 <meta name="description" content="I built a lives economy into a puzzle game and then deleted it, because the game turned out to be too fair to charge anybody. Every reason the paywall was unreachable was a design decision I still think is correct.">
 <link rel="canonical" href="https://patmossoftware.com/blog/fairness-killed-the-paywall/">
 <meta name="theme-color" content="#EDEBFF">
@@ -136,7 +136,7 @@
   look-ahead in them at all and cannot really be failed.</p>
 
   <p>I never once hit the wall. Not in a full evening of trying, and I was
-  trying &mdash; by that point I was deliberately playing badly to see the
+  trying. By that point I was deliberately playing badly to see the
   screen I had built. Nobody who was actually enjoying the game was ever going
   to see it.</p>
 
@@ -168,7 +168,7 @@
 
   <p>The third one is what really did it: dead ends get caught at the move that
   causes them. A rectangle can obey every visible rule and still
-  make the rest of the puzzle unsolvable &mdash; leaving some number with
+  make the rest of the puzzle unsolvable, leaving some number with
   nowhere to go, or a square that nothing can reach. Without a check for that,
   you find out twenty moves later at a square nothing fits, and you get charged
   for a mistake you made ages ago. So the game enumerates each unplaced
@@ -211,7 +211,7 @@
   what lets the whole thing be &ldquo;past level 40&rdquo; instead of a tier
   lock that could strand a free player halfway through a run on a level they
   cannot open. That one constraint on the level plan is doing a lot of quiet
-  work &mdash; it also means the hard tiers are genuinely something the purchase
+  work: it also means the hard tiers are genuinely something the purchase
   unlocks, rather than content that was already there behind a different
   sign.</p>
 
@@ -221,7 +221,7 @@
 
   <h2>What the code remembers</h2>
 
-  <p><code>LivesManager</code> became <code>PlayerWallet</code> &mdash; hints
+  <p><code>LivesManager</code> became <code>PlayerWallet</code>, holding hints
   and the unlock, nothing else. A class called <code>LivesManager</code> with no
   lives in it is the kind of lie that costs somebody an hour six months later,
   and that somebody is me.</p>
@@ -243,7 +243,7 @@
 
   <p>I do not know yet whether the content gate converts better than the lives
   economy would have, and I never will, because the lives economy converted at a
-  rate I could not measure &mdash; nobody reached it.</p>
+  rate I could not measure, because nobody reached it.</p>
 
   <p>What I am fairly confident about is the general shape of the mistake. A
   free-to-play wall is a machine for converting player failure into money, and I
