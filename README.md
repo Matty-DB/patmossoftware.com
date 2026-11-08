@@ -10,7 +10,7 @@ break because something else went down, and there is nothing to rebuild before
 a change goes out.
 
 ```
-/                              studio home, leads with the current app
+/                              RunFlow-first home, puzzle apps below
 /shikaku/                      the app page
 /blog/                         post index
 /blog/<slug>/                  a post
@@ -18,6 +18,7 @@ a change goes out.
 /privacy/                      privacy policy
 /og.png                        default social preview
 /shikaku/og.png                social preview for the app page and its post
+/assets/                        Patmos app icons used on the home page
 /tools/make-og.py              regenerates both preview images
 ```
 

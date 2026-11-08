@@ -16,18 +16,19 @@ Everything is drawn at 4x and downsampled, because PIL has no antialiasing on
 primitives and the mark's thin strokes alias badly at final size.
 """
 
-from PIL import Image, ImageChops, ImageDraw, ImageFont
+import math
+from PIL import Image, ImageDraw, ImageFont
 
 W, H, SS = 1200, 630, 4
 
-BG = (10, 15, 22)
-BG_END = (6, 10, 15)
-INK = (238, 243, 248)
-MUTED = (142, 163, 181)
-GOLD = (201, 162, 39)
-SEA = (95, 127, 150)
+BG = (237, 235, 255)
+BG_END = (250, 237, 245)
+INK = (64, 55, 111)
+MUTED = (105, 98, 139)
+GOLD = (255, 59, 115)
+SEA = (92, 82, 158)
 
-SERIF = "/System/Library/Fonts/Supplemental/Iowan Old Style.ttc"
+SERIF = "/System/Library/Fonts/Supplemental/Arial Rounded Bold.ttf"
 SANS = "/System/Library/Fonts/Supplemental/Verdana.ttf"
 
 
@@ -39,7 +40,7 @@ def font(path, size, index=0):
 
 
 def backdrop():
-    """Vertical gradient plus the gold horizon glow from the site's CSS."""
+    """Lavender-to-blush gradient from the Patmos site palette."""
     img = Image.new("RGB", (W * SS, H * SS), BG)
     d = ImageDraw.Draw(img)
     for y in range(H * SS):
@@ -48,19 +49,7 @@ def backdrop():
             [(0, y), (W * SS, y)],
             fill=tuple(round(BG[i] + (BG_END[i] - BG[i]) * t) for i in range(3)),
         )
-
-    glow = Image.new("RGB", (W * SS, H * SS), (0, 0, 0))
-    gd = ImageDraw.Draw(glow)
-    cx, cy, r = W * SS // 2, int(H * SS * 1.08), int(W * SS * 0.62)
-    steps = 90
-    for i in range(steps, 0, -1):
-        f = i / steps
-        rr = int(r * f)
-        v = int(46 * (1 - f) ** 1.7)
-        gd.ellipse([cx - rr, cy - int(rr * 0.62), cx + rr, cy + int(rr * 0.62)],
-                   fill=(int(v * 0.86), int(v * 0.72), int(v * 0.22)))
-
-    return ImageChops.add(img, glow)
+    return img
 
 
 def tracked(d, xy, text, fnt, fill, tracking):
@@ -77,17 +66,16 @@ def tracked_width(d, text, fnt, tracking):
 
 
 def mark(d, cx, cy, size):
-    """The Patmos mark: sun over a horizon. Mirrors the inline SVG on the site."""
+    """The Patmos sparkle mark in pink with a purple center."""
     s = size / 64
-    r = 11 * s
-    d.ellipse([cx - r, cy - r, cx + r, cy + r], outline=GOLD, width=max(1, round(1.75 * s)))
-    r2 = 4 * s
-    d.ellipse([cx - r2, cy - r2, cx + r2, cy + r2], fill=GOLD)
-    y1 = cy + 20 * s
-    d.line([cx - 24 * s, y1, cx + 24 * s, y1], fill=SEA, width=max(1, round(1.75 * s)))
-    y2 = cy + 26 * s
-    d.line([cx - 18 * s, y2, cx + 2 * s, y2], fill=SEA, width=max(1, round(1.5 * s)))
-    d.line([cx + 6 * s, y2, cx + 18 * s, y2], fill=SEA, width=max(1, round(1.5 * s)))
+    points = []
+    for i in range(8):
+        angle = -math.pi / 2 + i * math.pi / 4
+        radius = (25 if i % 2 == 0 else 8) * s
+        points.append((cx + math.cos(angle) * radius, cy + math.sin(angle) * radius))
+    d.polygon(points, fill=GOLD)
+    r = 4 * s
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=SEA)
 
 
 def rule(d, cx, y, width, thickness=2):
@@ -105,21 +93,24 @@ def rule(d, cx, y, width, thickness=2):
 def site_og(path):
     img = backdrop()
     d = ImageDraw.Draw(img)
-    f_title = font(SERIF, 78 * SS)
+    f_title = font(SERIF, 82 * SS)
     f_tag = font(SANS, 25 * SS)
+    f_by = font(SANS, 19 * SS)
 
-    mark(d, W * SS // 2, 208 * SS, 128 * SS)
+    mark(d, W * SS // 2, 184 * SS, 116 * SS)
 
-    tr = 11 * SS
-    title = "PATMOS SOFTWARE"
-    x = (W * SS - tracked_width(d, title, f_title, tr)) / 2
-    tracked(d, (x, 300 * SS), title, f_title, INK, tr)
+    title = "RUNFLOW"
+    x = (W * SS - d.textlength(title, font=f_title)) / 2
+    d.text((x, 294 * SS), title, font=f_title, fill=INK)
 
-    rule(d, W * SS // 2, 425 * SS, 300 * SS, 2 * SS)
+    rule(d, W * SS // 2, 414 * SS, 300 * SS, 2 * SS)
 
-    tag = "An app development studio"
-    d.text(((W * SS - d.textlength(tag, font=f_tag)) / 2, 460 * SS), tag,
+    tag = "Running plans · AI plan import"
+    d.text(((W * SS - d.textlength(tag, font=f_tag)) / 2, 446 * SS), tag,
            font=f_tag, fill=MUTED)
+    status = "COMING SOON · IPHONE"
+    d.text(((W * SS - d.textlength(status, font=f_by)) / 2, 500 * SS), status,
+           font=f_by, fill=SEA)
 
     img.resize((W, H), Image.LANCZOS).save(path, "PNG", optimize=True)
     return path
