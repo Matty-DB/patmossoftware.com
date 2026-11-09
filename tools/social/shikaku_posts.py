@@ -6,8 +6,6 @@ import json, random, sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-OUT = Path(sys.argv[1])
-OUT.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------- generation
 
@@ -234,6 +232,8 @@ def render(p, title_top, title_rest, footer, solved, path):
 
 
 if __name__ == "__main__":
+    OUT = Path(sys.argv[1])
+    OUT.mkdir(parents=True, exist_ok=True)
     specs = [
         ("01", 5, 5, 11, 6, 5, 8, "Warm-up", "Easy"),
         ("02", 6, 6, 23, 8, 6, 10, "Getting there", "Medium"),
