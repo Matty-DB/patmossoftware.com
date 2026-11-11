@@ -108,7 +108,7 @@ def site_og(path):
     tag = "Running plans · AI plan import"
     d.text(((W * SS - d.textlength(tag, font=f_tag)) / 2, 446 * SS), tag,
            font=f_tag, fill=MUTED)
-    status = "COMING SOON · IPHONE"
+    status = "FREE ON IPHONE · OUT NOW"
     d.text(((W * SS - d.textlength(status, font=f_by)) / 2, 500 * SS), status,
            font=f_by, fill=SEA)
 
