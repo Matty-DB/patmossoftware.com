@@ -120,7 +120,7 @@ def end_card(t):
     sp.gradient_text(img, ((W - tw) / 2, 960), "Shikaku", big)
     d = ImageDraw.Draw(img)
     sp.centered(d, 1170, "Free on iPhone", sp.font(72, "Heavy"), sp.INK_DARK)
-    sp.centered(d, 1270, "Search Shikaku Patmos", sp.font(44, "Bold"), sp.INK)
+    sp.centered(d, 1270, "Link in bio", sp.font(44, "Bold"), sp.INK)
     sp.mark(d, 1640)
     return img
 

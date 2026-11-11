@@ -170,9 +170,9 @@ def centered(d, y, text, fnt, fill):
     d.text(((W - tw) / 2, y), text, font=fnt, fill=fill)
 
 
-def mark(d, y):
+def mark(d, y, kind="game"):
     a, b, c = font(30, "Semibold"), font(33, "Black"), font(30, "Semibold")
-    parts = [("a ", a), ("Patmos", b), (" game", c)]
+    parts = [("a ", a), ("Patmos", b), (" " + kind, c)]
     total = sum(d.textlength(t, font=f) for t, f in parts) + 40
     x = (W - total) / 2
     # sparkle

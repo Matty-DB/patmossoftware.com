@@ -24,7 +24,7 @@ for y in range(H):
     d.line([(0, y), (W, y)], fill=tuple(round(TOP[i] + (BOT[i] - TOP[i]) * t) for i in range(3)))
 
 # pill label
-lab = "COMING SOON · IPHONE"
+lab = sys.argv[2] if len(sys.argv) > 2 else "COMING SOON · IPHONE"
 lf = font(30, "Black")
 lw = d.textlength(lab, font=lf)
 d.rounded_rectangle([(W - lw) / 2 - 28, 110, (W + lw) / 2 + 28, 168], 29, fill=(255, 255, 255))
@@ -78,5 +78,5 @@ foot = "patmossoftware.com"
 ff = font(32, "Bold")
 fw = d.textlength(foot, font=ff)
 d.text(((W - fw) / 2, 1250), foot, font=ff, fill=MUTED)
-img.save(OUT / "runflow-teaser.png", "PNG", optimize=True)
+img.save(OUT / (sys.argv[3] if len(sys.argv) > 3 else "runflow-teaser.png"), "PNG", optimize=True)
 print("ok")
